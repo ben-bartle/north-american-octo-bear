@@ -1,53 +1,53 @@
 'use strict';
 
 var _ = require('lodash');
-var Spell = require('./spell.model');
+var Item = require('./item.model');
 
-// Get list of spells
+// Get list of items
 exports.index = function(req, res) {
-  Spell.find(function (err, spells) {
+  Item.find(function (err, items) {
     if(err) { return handleError(res, err); }
-    return res.json(200, spells);
+    return res.json(200, items);
   });
 };
 
-// Get a single spell
+// Get a single item
 exports.show = function(req, res) {
-  Spell.findById(req.params.id, function (err, spell) {
+  Item.findById(req.params.id, function (err, item) {
     if(err) { return handleError(res, err); }
-    if(!spell) { return res.send(404); }
-    return res.json(spell);
+    if(!item) { return res.send(404); }
+    return res.json(item);
   });
 };
 
-// Creates a new spell in the DB.
+// Creates a new item in the DB.
 exports.create = function(req, res) {
-  Spell.create(req.body, function(err, spell) {
+  Item.create(req.body, function(err, item) {
     if(err) { return handleError(res, err); }
-    return res.json(201, spell);
+    return res.json(201, item);
   });
 };
 
-// Updates an existing spell in the DB.
+// Updates an existing item in the DB.
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
-  Spell.findById(req.params.id, function (err, spell) {
+  Item.findById(req.params.id, function (err, item) {
     if (err) { return handleError(res, err); }
-    if(!spell) { return res.send(404); }
-    var updated = _.merge(spell, req.body);
+    if(!item) { return res.send(404); }
+    var updated = _.merge(item, req.body);
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
-      return res.json(200, spell);
+      return res.json(200, item);
     });
   });
 };
 
-// Deletes a spell from the DB.
+// Deletes a item from the DB.
 exports.destroy = function(req, res) {
-  Spell.findById(req.params.id, function (err, spell) {
+  Item.findById(req.params.id, function (err, item) {
     if(err) { return handleError(res, err); }
-    if(!spell) { return res.send(404); }
-    spell.remove(function(err) {
+    if(!item) { return res.send(404); }
+    item.remove(function(err) {
       if(err) { return handleError(res, err); }
       return res.send(204);
     });
