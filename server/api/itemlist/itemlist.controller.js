@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var Itemlist = require('./itemlist.model');
+var Item = require('../item/item.model');
 
 // Get list of itemlists
 exports.index = function(req, res) {
@@ -13,10 +14,15 @@ exports.index = function(req, res) {
 
 // Get a single itemlist
 exports.show = function(req, res) {
-  Itemlist.findById(req.params.id, function (err, itemlist) {
+  Itemlist.findById(req.params.id).lean().exec(function (err, itemlist) {
     if(err) { return handleError(res, err); }
     if(!itemlist) { return res.send(404); }
-    return res.json(itemlist);
+
+    //extract the items that match these ids
+    Item.find({}).where('_id').in(itemlist.itemIds).exec(function(err,items){
+      itemlist.items = items;
+      return res.json(itemlist);
+    });
   });
 };
 

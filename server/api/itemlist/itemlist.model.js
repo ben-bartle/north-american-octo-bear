@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
 
 var ItemlistSchema = new Schema({
   name: String,
-  items: [Schema.Types.ObjectId],
+  itemIds: [Schema.Types.ObjectId],
   active: Boolean
 });
 
