@@ -8,5 +8,5 @@ module.exports = {
     uri: 'mongodb://localhost/northamericanoctobear-dev'
   },
 
-  seedDB: true
+  seedDB: false
 };

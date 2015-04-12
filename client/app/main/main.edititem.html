@@ -1,0 +1,43 @@
+<form class="form-horizontal">
+	<div class="form-group" ng-repeat="(i,kvp) in editdata">
+		<div class="col-lg-4">
+			<input type="text" class="form-control" ng-model="kvp.key"/>
+		</div>
+		<div class="col-lg-6">
+			<input type="text" class="form-control" ng-model="kvp.value"/>
+		</div>
+		<div class="col-lg-2">
+			<button class="btn btn-danger"
+	                ng-click="deleteRow(i)">
+	            <span class="glyphicon glyphicon-trash"></span>
+	        </button>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-lg-4">
+			Notes
+		</div>
+		<div class="col-lg-8">
+			<input type="textarea" class="form-control" ng-model="notes"/>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-lg-10">
+			<button class="btn btn-primary"
+	                ng-click="cancel()">
+	            <span class="glyphicon glyphicon-remove"></span>
+	        </button>
+			<button class="btn btn-success"
+	                ng-click="save()">
+	            <span class="glyphicon glyphicon-ok"></span>
+	        </button>
+	        
+		</div>
+		<div class="col-lg-2">
+			<button class="btn btn-success"
+	                ng-click="addRow(i)">
+	            <span class="glyphicon glyphicon-plus"></span>
+	        </button>
+		</div>
+	</div>
+</form>
